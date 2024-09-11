@@ -1,0 +1,62 @@
+defaults:
+  - _self_
+  - task: halfcheetah-medium-expert-v2
+
+pipeline_name: cwm_d4rl_mujoco
+mode: cwm_training
+seed: 0
+device: cuda:0
+
+# Environment
+terminal_penalty: -100
+discount: 0.997
+
+# CWM
+solver: ddim
+## Network Architecture
+emb_dim: 256
+d_model: 320
+n_heads: 10
+depth: 2
+label_dropout: 0.25
+sampling_steps: 1
+predict_noise: True
+next_obs_loss_weight: 10.
+ema_rate: 0.999
+
+# Actor
+actor_learning_rate: 0.0003
+
+# Critic
+hidden_dim: 256
+critic_learning_rate: 0.0003
+
+# Training
+diffusion_gradient_steps: 1000000
+invdyn_gradient_steps: 200000
+ema_update_interval: 5
+batch_size: 64
+log_interval: 1000
+save_interval: 100000
+
+#Policy Gradient
+policy_gradient_steps: 500000
+policy_gradient_lr: 0.1
+policy_optimalization_steps: 2
+
+# Inference
+diffusion_ckpt: latest
+actor_ckpt: latest
+critic_ckpt: latest
+invdyn_ckpt: latest
+num_envs: 5
+num_episodes: 3
+num_candidates: 50
+temperature: 0.5
+use_ema: True
+
+# hydra
+hydra:
+  job:
+    chdir: false
+

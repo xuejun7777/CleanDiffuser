@@ -1,0 +1,7 @@
+env_name: "halfcheetah-medium-expert-v2"
+weight_temperature: 50.
+eta: 1.
+target_return: 0.95
+w_cfg: 1.2
+horizon: 32
+mini_horizon: 15

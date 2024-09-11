@@ -308,6 +308,7 @@ class ContinuousConsistencyModel(DiffusionModel):
         with torch.no_grad():
             pred_x_n = self.f(x_n, sigma_n, condition.detach(), self.model)
 
+
         loss = pseudo_huber_loss(pred_x_m, pred_x_n, self.pseudo_huber_constant)
 
         unweighted_loss = (loss * (1 - self.fix_mask) * self.loss_weight)
